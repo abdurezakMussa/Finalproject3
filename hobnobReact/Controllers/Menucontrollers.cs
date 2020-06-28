@@ -26,6 +26,7 @@ namespace Menucontrollers.Controllers
                 var menuitems=_repository.GetAllmenus();
                 return Ok(menuitems);
         }
+
         [HttpGet("{id}", Name="GetMenuById")]
         public ActionResult<Menu> GetMenuById(int id)
         {
@@ -48,6 +49,24 @@ namespace Menucontrollers.Controllers
          //return Ok(menuModel);
          return CreatedAtRoute(nameof(GetMenuById), new {Id = menuModel});//,MenuReadDto);
 
+        }
+        //Put api Menus/{id}
+        [HttpPut("{id}")]
+        public ActionResult UpdateMenu(int id, MenuUpdateDto menuUpdateDto)
+        {
+            var  menumeodelfromRepo = _repository.GetMenuById(id);
+            if (menumeodelfromRepo==null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(menuUpdateDto, menumeodelfromRepo);
+            
+            _repository.updateMenu(menumeodelfromRepo);
+            
+            _repository.SaveChanges();
+
+            return NoContent();
         }
     }
 }

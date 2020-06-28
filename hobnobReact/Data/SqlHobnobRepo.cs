@@ -46,5 +46,10 @@ namespace hobnobReact.Data
         {
             return (_context.SaveChanges()>=0);
         }
+
+        public void updateMenu(Menu mu)
+        {
+           
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace hobnobReact.Data
         IEnumerable<Menu> GetAllmenus();
         Menu GetMenuById(int id);
         void CreateMenu(Menu mu);
+        void updateMenu(Menu mu);
        
     }
 }

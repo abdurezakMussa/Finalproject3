@@ -10,6 +10,7 @@ namespace hobnobReact.Profiles
         {
             CreateMap<Menu,MenuReadDto>();
             CreateMap<MenuCreateDto, Menu>();
+            CreateMap<MenuUpdateDto,Menu>();
             
         }
     }

@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json.Serialization;
 
 
 namespace hobnobReact
@@ -32,7 +33,10 @@ namespace hobnobReact
            services.AddDbContext<HobnobContext>(opt => opt.UseSqlServer
                 (Configuration.GetConnectionString("hobnobConnection")));
                
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(s=> {
+                s.SerializerSetting.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IhobnobRepo, SqlHobnobRepo>();
         }
